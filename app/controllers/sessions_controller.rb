@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:session][:password])
       reset_session
+      remember_me?(user)
+      remember user
       log_in user
       redirect_to user
     else
@@ -16,7 +18,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_url, status: :see_other
+  end
+
+  private
+
+  def remember_me?(user)
+    !params[:session][:remember_me].to_i.zero? ? remember(user) : forget(user)
   end
 end
