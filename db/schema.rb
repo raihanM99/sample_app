@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_10_065520) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_10_081712) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.boolean "admin", default: false
     t.string "password_digest"
     t.string "remember_digest"
     t.datetime "created_at", null: false
